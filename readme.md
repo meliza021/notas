@@ -101,4 +101,199 @@ SELECT SUM(precio) FROM ventas;
 SELECT AVG(edad) FROM empleados;
 ```
 
+### 🔤 Funciones de Texto 🐻
+
+| Función       | Descripción       |
+| ------------- | ----------------- |
+| `UPPER()`     | Mayúsculas ✨      |
+| `LOWER()`     | Minúsculas 🐣      |
+| `LENGTH()`    | Largo del texto 📏 |
+| `CONCAT()`    | Unir textos 🔗     |
+| `SUBSTRING()` | Subcadena ✂️       |
+
+```sql
+SELECT UPPER(nombre) FROM usuarios;
+SELECT CONCAT(nombre, ' ', apellido) FROM usuarios;
+```
+
 ---
+
+### 🔢 Funciones Numéricas 🦊
+
+| Función   | Descripción        |
+| --------- | ------------------ |
+| `ROUND()` | Redondear 🔵        |
+| `CEIL()`  | Redondear arriba ⬆️ |
+| `FLOOR()` | Redondear abajo ⬇️  |
+| `ABS()`   | Valor absoluto ♾️   |
+| `MOD()`   | Módulo 🧩           |
+
+```sql
+SELECT ROUND(3.1416, 2); -- 3.14
+SELECT ABS(-15);
+```
+
+---
+
+### ⏰ Funciones de Fecha y Hora 🐨
+
+| Función                      | Descripción                  |
+| ---------------------------- | ---------------------------- |
+| `NOW()`                      | Fecha y hora actual 🕒        |
+| `CURDATE()`                  | Solo fecha 📅                 |
+| `CURTIME()`                  | Solo hora ⏰                  |
+| `YEAR()`, `MONTH()`, `DAY()` | Extraer partes de la fecha 🗓️ |
+
+```sql
+SELECT NOW();
+SELECT YEAR(fecha_nacimiento) FROM empleados;
+```
+
+---
+
+### ✨ Otras Funciones Útiles 🦄
+
+- `IFNULL()`: Devuelve otro valor si es NULL.
+- `COALESCE()`: Devuelve el primer valor NO NULL.
+- `CASE`: Condiciones dentro de SELECT 🐰
+
+```sql
+SELECT IFNULL(telefono, 'No registrado') FROM clientes;
+
+SELECT 
+  nombre,
+  CASE
+    WHEN salario > 1000 THEN 'Alto'
+    ELSE 'Bajo'
+  END AS nivel_salarial
+FROM empleados;
+```
+
+---
+
+## 📝 Procedimientos Almacenados 📝
+
+Los **procedimientos almacenados** 🗂️ me ayudan a guardar consultas y lógica que puedo reutilizar.
+
+- 🧵 **Crear procedimiento**
+
+  ```sql
+  DELIMITER //
+  CREATE PROCEDURE mostrarEmpleados()
+  BEGIN
+    SELECT * FROM empleados;
+  END //
+  DELIMITER ;
+  ```
+
+- 🎀 **Llamar procedimiento**
+
+  ```sql
+  CALL mostrarEmpleados();
+  ```
+
+- ✂️ **Eliminar procedimiento**
+
+  ```sql
+  DROP PROCEDURE IF EXISTS mostrarEmpleados;
+  ```
+
+- ✏️ **Con parámetros**
+
+  ```sql
+  DELIMITER //
+  CREATE PROCEDURE filtrarPorDepartamento(IN dep VARCHAR(50))
+  BEGIN
+    SELECT * FROM empleados WHERE departamento = dep;
+  END //
+  DELIMITER ;
+  
+  CALL filtrarPorDepartamento('Marketing');
+  ```
+
+---
+
+## 🕒 Eventos Programados 🕒
+
+Los **eventos** ⏰ permiten ejecutar tareas cada cierto tiempo o en un momento específico.
+
+- 🔓 **Activar el programador**
+
+  ```sql
+  SET GLOBAL event_scheduler = ON;
+  ```
+
+- 🧩 **Crear evento**
+
+  ```sql
+  CREATE EVENT borrarTemporales
+  ON SCHEDULE EVERY 1 DAY
+  DO
+    DELETE FROM logs WHERE fecha < NOW() - INTERVAL 30 DAY;
+  ```
+
+- ❌ **Eliminar evento**
+
+  ```sql
+  DROP EVENT IF EXISTS borrarTemporales;
+  ```
+
+- 🧵 **Listar eventos**
+
+  ```sql
+  SHOW EVENTS;
+  ```
+
+---
+
+## 🔐 Permisos de Usuarios 🔐
+
+En MySQL puedo dar permisos para controlar quién hace qué 🛡️✨.
+
+- 🧑‍💻 **Crear usuario**
+
+  ```sql
+  CREATE USER 'usuario1'@'localhost' IDENTIFIED BY 'contrasena123';
+  ```
+
+- 🎁 **Dar permisos**
+
+  ```sql
+  GRANT SELECT, INSERT ON mi_base.* TO 'usuario1'@'localhost';
+  ```
+
+- 🧹 **Revocar permisos**
+
+  ```sql
+  REVOKE INSERT ON mi_base.* FROM 'usuario1'@'localhost';
+  ```
+
+- 🔑 **Ver permisos**
+
+  ```sql
+  SHOW GRANTS FOR 'usuario1'@'localhost';
+  ```
+
+- 🗑️ **Eliminar usuario**
+
+  ```sql
+  DROP USER 'usuario1'@'localhost';
+  ```
+
+---
+
+## 🌟 Tips Finales 🌟
+
+✨ Siempre hago **backups** para no perder datos.  
+✨ Reviso bien mis `WHERE` para no borrar o actualizar todo sin querer 🫣.  
+✨ Uso `EXPLAIN` para entender mis consultas y optimizarlas.  
+✨ Organizo mis bases con nombres claros y consistentes 🗂️.
+
+---
+
+## 💖 Gracias por leer mi README 💖
+
+Espero que este README 🌸 sea útil para mí y para ti 🫶.  
+Lo hice con mucho amor y con todos mis apuntes 🐰✨.
+
+**¡Sigamos aprendiendo! 🚀**
