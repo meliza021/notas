@@ -297,3 +297,5 @@ Espero que este README 🌸 sea útil para mí y para ti 🫶.
 Lo hice con mucho amor y con todos mis apuntes 🐰✨.
 
 **¡Sigamos aprendiendo! 🚀**
+
+<!-- se le entrega a adrian sjsjjs -->
